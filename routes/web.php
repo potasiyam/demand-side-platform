@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\ViewsController@getHomeView');
+Route::get('/campaign/create', 'App\Http\Controllers\ViewsController@getCampaignCreateView')->name('campaign.create');
+Route::get('/campaign/{campaignId}/edit', 'App\Http\Controllers\ViewsController@getCampaignEditView');

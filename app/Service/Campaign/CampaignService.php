@@ -135,7 +135,7 @@ class CampaignService implements CampaignServiceInterface
             $extension = explode('.', $name);
             $extension = end($extension);
 
-            Storage::put($name, file_get_contents($creative));
+            Storage::disk('public')->put($name, file_get_contents($creative));
 
             $uploadedCreatives[$key] = [
                 'file_name' => $name,

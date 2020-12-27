@@ -22,7 +22,7 @@ class CampaignRepository implements CampaignRepositoryInterface
      * @param int $perPage
      * @return LengthAwarePaginator
      */
-    public function getCampaigns(int $pageNo, int $perPage = 20): LengthAwarePaginator
+    public function getCampaigns(int $pageNo, int $perPage = 100): LengthAwarePaginator
     {
         return $this->campaign
             ->with('creatives')
