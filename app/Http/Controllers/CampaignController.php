@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateCampaign;
 use App\Service\Campaign\CampaignServiceInterface;
 use App\Transformer\ApiResponseTransformer;
 use Exception;
-use http\Env\Request;
 use Illuminate\Http\JsonResponse;
 
 class CampaignController extends Controller

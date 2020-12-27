@@ -51,6 +51,7 @@ class CampaignService implements CampaignServiceInterface
     public function createCampaign(array $request): ServiceDto
     {
         try {
+            $campaign = [];
             $campaign['name'] = $request['name'];
             $campaign['start_date'] = $request['start_date'];
             $campaign['end_date'] = $request['end_date'];
