@@ -21,8 +21,6 @@ class CreateCampaignCreativesTable extends Migration
                 $table->string('file_name');
                 $table->string('file_path');
                 $table->string('file_extension');
-                $table->integer('file_width');
-                $table->integer('file_height');
                 $table->timestamps();
             }
         );

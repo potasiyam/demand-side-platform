@@ -9,5 +9,5 @@ class CampaignCreative extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['campaign_id', 'file_name', 'file_path', 'file_extension', 'file_width', 'file_height'];
+    protected $fillable = ['campaign_id', 'file_name', 'file_path', 'file_extension'];
 }

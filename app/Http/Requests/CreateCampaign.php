@@ -6,10 +6,8 @@ use App\Transformer\ApiResponseTransformer;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
 
-class GetCampaigns extends FormRequest
+class CreateCampaign extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +27,27 @@ class GetCampaigns extends FormRequest
     public function rules(): array
     {
         return [
-            'page' => 'required|numeric|min:1'
+            "name" => "required|string|max:255",
+            "start_date" => "required|date_format:Y-m-d",
+            "end_date" => "required|date_format:Y-m-d",
+            "total_budget" => "required|numeric",
+            "daily_budget" => "required|numeric",
+            "creatives" => "required|array",
+            "creatives.*" => "mimes:jpg,jpeg,png,bmp|max:20000"
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'creatives.*.required' => 'Please upload an image',
+            'creatives.*.mimes' => 'Only jpeg,png and bmp images are allowed',
+            'creatives.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
         ];
     }
 
