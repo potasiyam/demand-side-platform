@@ -4,16 +4,21 @@ namespace App\Service\Campaign;
 
 use App\Contracts\ServiceDto;
 use App\Repository\Campaign\CampaignRepositoryInterface;
+use App\Repository\CampaignCreative\CampaignCreativeRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 
 class CampaignService implements CampaignServiceInterface
 {
     private $campaignRepository;
+    private $campaignCreativeRepository;
 
-    public function __construct(CampaignRepositoryInterface $campaignRepository)
-    {
+    public function __construct(
+        CampaignRepositoryInterface $campaignRepository,
+        CampaignCreativeRepositoryInterface $campaignCreativeRepository
+    ) {
         $this->campaignRepository = $campaignRepository;
+        $this->campaignCreativeRepository = $campaignCreativeRepository;
     }
 
     /**
@@ -84,6 +89,29 @@ class CampaignService implements CampaignServiceInterface
             $campaign = $this->campaignRepository->updateCampaign($campaignId, $campaignUpdateData, $creatives);
 
             return new ServiceDto("Campaign $campaign->name updated", 200, $campaign);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Delete campaign creative
+     *
+     * @param int $campaignId
+     * @param int $creativeId
+     * @return ServiceDto
+     * @throws Exception
+     */
+    public function deleteCampaignCreative(int $campaignId, int $creativeId): ServiceDto
+    {
+        try {
+            $response = $this->campaignCreativeRepository->deleteCreative($campaignId, $creativeId);
+
+            if (!$response) {
+                throw new Exception('Campaign creative delete failed');
+            }
+
+            return new ServiceDto("Campaign creative deleted", 200, []);
         } catch (Exception $e) {
             throw $e;
         }

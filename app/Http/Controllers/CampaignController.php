@@ -33,7 +33,11 @@ class CampaignController extends Controller
 
             return ApiResponseTransformer::success($campaigns->data, $campaigns->message, $campaigns->statusCode);
         } catch (Exception $e) {
-            return ApiResponseTransformer::error($e->getMessage(), 'Get campaigns request failed', $e->getCode());
+            return ApiResponseTransformer::error(
+                $e->getMessage(),
+                'Get campaigns request failed',
+                $e->getCode() ? $e->getCode() : 400
+            );
         }
     }
 
@@ -50,7 +54,11 @@ class CampaignController extends Controller
 
             return ApiResponseTransformer::success($campaign->data, $campaign->message, $campaign->statusCode);
         } catch (Exception $e) {
-            return ApiResponseTransformer::error($e->getMessage(), 'Campaign create failed', $e->getCode());
+            return ApiResponseTransformer::error(
+                $e->getMessage(),
+                'Campaign create failed',
+                $e->getCode() ? $e->getCode() : 400
+            );
         }
     }
 
@@ -68,7 +76,31 @@ class CampaignController extends Controller
 
             return ApiResponseTransformer::success($campaign->data, $campaign->message, $campaign->statusCode);
         } catch (Exception $e) {
-            return ApiResponseTransformer::error($e->getMessage(), 'Campaign update failed', $e->getCode());
+            return ApiResponseTransformer::error(
+                $e->getMessage(),
+                'Campaign update failed',
+                $e->getCode() ? $e->getCode() : 400
+            );
+        }
+    }
+
+    /**
+     * @param int $campaignId
+     * @param int $creativeId
+     * @return JsonResponse
+     */
+    public function deleteCampaignCreative(int $campaignId, int $creativeId): JsonResponse
+    {
+        try {
+            $response = $this->campaignService->deleteCampaignCreative($campaignId, $creativeId);
+
+            return ApiResponseTransformer::success($response->data, $response->message, $response->statusCode);
+        } catch (Exception $e) {
+            return ApiResponseTransformer::error(
+                $e->getMessage(),
+                'Campaign creative delete failed',
+                $e->getCode() ? $e->getCode() : 400
+            );
         }
     }
 }

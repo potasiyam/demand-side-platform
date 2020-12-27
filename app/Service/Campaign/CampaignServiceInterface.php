@@ -34,4 +34,14 @@ interface CampaignServiceInterface
      * @throws Exception
      */
     public function updateCampaign(int $campaignId, array $request): ServiceDto;
+
+    /**
+     * Delete campaign creative
+     *
+     * @param int $campaignId
+     * @param int $creativeId
+     * @return ServiceDto
+     * @throws Exception
+     */
+    public function deleteCampaignCreative(int $campaignId, int $creativeId): ServiceDto;
 }
