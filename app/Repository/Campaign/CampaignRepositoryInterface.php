@@ -24,4 +24,15 @@ interface CampaignRepositoryInterface
      * @return Campaign
      */
     public function createCampaign(array $campaign, array $creatives): Campaign;
+
+
+    /**
+     * Update campaign via campign id
+     *
+     * @param $campaignId
+     * @param $campaignUpdateData
+     * @param $creatives
+     * @return Campaign
+     */
+    public function updateCampaign($campaignId, $campaignUpdateData, $creatives): Campaign;
 }

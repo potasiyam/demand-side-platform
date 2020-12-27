@@ -63,6 +63,33 @@ class CampaignService implements CampaignServiceInterface
     }
 
     /**
+     * Update campaign
+     *
+     * @param int $campaignId
+     * @param array $request
+     * @return ServiceDto
+     * @throws Exception
+     */
+    public function updateCampaign(int $campaignId, array $request): ServiceDto
+    {
+        try {
+            $campaignUpdateData['name'] = $request['name'];
+            $campaignUpdateData['start_date'] = $request['start_date'];
+            $campaignUpdateData['end_date'] = $request['end_date'];
+            $campaignUpdateData['total_budget'] = $request['total_budget'];
+            $campaignUpdateData['daily_budget'] = $request['daily_budget'];
+
+            $creatives = $this->uploadCreatives($request['creatives']);
+
+            $campaign = $this->campaignRepository->updateCampaign($campaignId, $campaignUpdateData, $creatives);
+
+            return new ServiceDto("Campaign $campaign->name updated", 200, $campaign);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
      * Upload images in storage and returns array with file name,
      * file extension and file path
      *

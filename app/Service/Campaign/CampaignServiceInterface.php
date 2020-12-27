@@ -24,4 +24,14 @@ interface CampaignServiceInterface
      * @throws Exception
      */
     public function createCampaign(array $request): ServiceDto;
+
+    /**
+     * Update campaign
+     *
+     * @param int $campaignId
+     * @param array $request
+     * @return ServiceDto
+     * @throws Exception
+     */
+    public function updateCampaign(int $campaignId, array $request): ServiceDto;
 }

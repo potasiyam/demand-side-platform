@@ -47,6 +47,29 @@ class CampaignRepository implements CampaignRepositoryInterface
     }
 
     /**
+     * Update campaign via campign id
+     *
+     * @param $campaignId
+     * @param $campaignUpdateData
+     * @param $creatives
+     * @return Campaign
+     */
+    public function updateCampaign($campaignId, $campaignUpdateData, $creatives): Campaign
+    {
+        $campaign = $this->campaign->where('id', $campaignId)->first();
+
+        foreach ($campaignUpdateData as $index => $value) {
+            $campaign->{$index} = $value;
+        }
+
+        $campaign->save();
+
+        $this->insertCreatives($campaign, $creatives);
+
+        return $campaign;
+    }
+
+    /**
      * @param Campaign $campaign
      * @param array $creatives
      */

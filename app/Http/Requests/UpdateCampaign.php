@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CreateCampaign extends FormRequest
+class UpdateCampaign extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,10 +32,11 @@ class CreateCampaign extends FormRequest
             "end_date" => "required|date_format:Y-m-d",
             "total_budget" => "required|numeric",
             "daily_budget" => "required|numeric",
-            "creatives" => "required|array",
+            "creatives" => "array",
             "creatives.*" => "mimes:jpg,jpeg,png,bmp|max:20000"
         ];
     }
+
 
     /**
      * Get custom messages for validator errors.
@@ -62,7 +63,7 @@ class CreateCampaign extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
-            ApiResponseTransformer::error($validator->errors(), 'Create campaign request failed', 422)
+            ApiResponseTransformer::error($validator->errors(), 'Update campaign request failed', 422)
         );
     }
 }

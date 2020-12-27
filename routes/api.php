@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/campaigns', 'App\Http\Controllers\CampaignController@getCampaigns');
 Route::post('/campaign/create', 'App\Http\Controllers\CampaignController@createCampaign');
+Route::post('/campaign/{campaignId}/update', 'App\Http\Controllers\CampaignController@updateCampaign');
