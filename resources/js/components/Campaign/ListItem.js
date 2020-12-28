@@ -30,7 +30,7 @@ class ListItem extends Component {
                     <a href="#"
                        onClick={this.handleShow}
                        className="btn btn-sm btn-outline-success rounded-0 mr-2">Preview</a>
-                    <a href="#" className="btn btn-sm btn-outline-info rounded-0 mr-2">Edit</a>
+                    <a href={'/campaign/'+this.state.campaign.id+'/edit'} className="btn btn-sm btn-outline-info rounded-0 mr-2">Edit</a>
                 </td>
                 <Modal size="lg" show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>

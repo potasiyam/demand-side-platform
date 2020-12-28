@@ -49,5 +49,6 @@
 </div>
 
 <script src="{{ asset('js/app.js') }}"></script>
+@yield('page-specific-js')
 </body>
 </html>

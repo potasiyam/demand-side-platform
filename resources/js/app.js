@@ -15,3 +15,4 @@ require('./bootstrap');
 require('./components/Example');
 require('./components/Campaign/List')
 require('./components/Campaign/Create')
+require('./components/Campaign/Edit')

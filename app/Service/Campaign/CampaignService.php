@@ -101,7 +101,11 @@ class CampaignService implements CampaignServiceInterface
             $campaignUpdateData['total_budget'] = $request['total_budget'];
             $campaignUpdateData['daily_budget'] = $request['daily_budget'];
 
-            $creatives = $this->uploadCreatives($request['creatives']);
+            if (isset($request['creatives'])) {
+                $creatives = $this->uploadCreatives($request['creatives']);
+            } else {
+                $creatives = [];
+            }
 
             $campaign = $this->campaignRepository->updateCampaign($campaignId, $campaignUpdateData, $creatives);
 
