@@ -17,6 +17,13 @@ interface CampaignServiceInterface
     public function getCampaigns(array $request): ServiceDto;
 
     /**
+     * @param $campaignId
+     * @return ServiceDto
+     * @throws Exception
+     */
+    public function getCampaignDetails($campaignId): ServiceDto;
+
+    /**
      * Creates campaign
      *
      * @param array $request

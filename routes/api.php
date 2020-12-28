@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/campaigns', 'App\Http\Controllers\CampaignController@getCampaigns');
+Route::get('/campaign/{id}', 'App\Http\Controllers\CampaignController@getCampaignDetails');
 Route::post('/campaign/create', 'App\Http\Controllers\CampaignController@createCampaign');
 Route::post('/campaign/{campaignId}/update', 'App\Http\Controllers\CampaignController@updateCampaign');
 Route::delete(

@@ -4,7 +4,7 @@ namespace App\Repository\Campaign;
 
 use App\Models\Campaign;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class CampaignRepository implements CampaignRepositoryInterface
 {
@@ -28,6 +28,20 @@ class CampaignRepository implements CampaignRepositoryInterface
             ->with('creatives')
             ->orderBy('id', 'desc')
             ->paginate($perPage, ['*'], 'page', $pageNo);
+    }
+
+    /**
+     * Get campaign details
+     *
+     * @param $campaignId
+     * @return Model|object|null
+     */
+    public function getCampaignDetails($campaignId)
+    {
+        return $this->campaign
+            ->with('creatives')
+            ->where('id', $campaignId)
+            ->first();
     }
 
     /**

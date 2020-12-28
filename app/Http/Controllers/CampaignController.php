@@ -41,6 +41,25 @@ class CampaignController extends Controller
     }
 
     /**
+     * @param $campaignId
+     * @return JsonResponse
+     */
+    public function getCampaignDetails(int $campaignId): JsonResponse
+    {
+        try {
+            $campaign = $this->campaignService->getCampaignDetails($campaignId);
+
+            return ApiResponseTransformer::success($campaign->data, $campaign->message, $campaign->statusCode);
+        } catch (Exception $e) {
+            return ApiResponseTransformer::error(
+                $e->getMessage(),
+                'Campaign not found',
+                $e->getCode() ? $e->getCode() : 400
+            );
+        }
+    }
+
+    /**
      * @param CreateCampaign $request
      * @return JsonResponse
      */

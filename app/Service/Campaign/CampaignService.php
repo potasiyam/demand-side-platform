@@ -42,6 +42,22 @@ class CampaignService implements CampaignServiceInterface
     }
 
     /**
+     * @param $campaignId
+     * @return ServiceDto
+     * @throws Exception
+     */
+    public function getCampaignDetails($campaignId): ServiceDto
+    {
+        try {
+            $campaign = $this->campaignRepository->getCampaignDetails($campaignId);
+
+            return new ServiceDto("Campaign fetched", 200, $campaign);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
      * Creates campaign
      *
      * @param array $request
